@@ -1,0 +1,35 @@
+# Iris Messenger — License
+
+Copyright © 2026 itsXactlY (aLca).
+
+Required Notice: Copyright © 2026 itsXactlY (aLca)
+
+Iris Messenger is licensed under the **PolyForm Noncommercial License
+1.0.0** — full text in [`LICENSE-POLYFORM-NC-1.0.0.md`](./LICENSE-POLYFORM-NC-1.0.0.md).
+
+In short: use it for any **noncommercial purpose** — personal use, research,
+education, hobby projects, charitable, public-research or government
+organizations. The license text has the exact definitions.
+
+## Commercial use
+
+Commercial use — selling it, operating a paid service with it, or using it in
+the operations of a for-profit enterprise — **requires a separate commercial
+license** from the copyright holder. Ask: https://github.com/itsXactlY/Iris/issues
+
+## Third-party components
+
+The distributed binaries contain third-party software under its own licenses
+(e.g. JackrabbitDLM under LGPL-2.1, Tor under BSD-3-Clause). Those licenses
+apply to those components; see [`NOTICE`](./NOTICE).
+
+## Trademark
+
+"Iris Messenger" and "Iris" are trademarks of itsXactlY (aLca). This license
+grants no trademark rights beyond identifying Iris Messenger as the origin of
+the work.
+
+## No warranty
+
+To the maximum extent permitted by law, Iris Messenger is provided "as is",
+without warranty of any kind. See the license text.

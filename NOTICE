@@ -1,0 +1,114 @@
+Iris Messenger
+Copyright © 2026 itsXactlY (aLca)
+
+This product is licensed under the PolyForm Noncommercial License 1.0.0
+(LICENSE-POLYFORM-NC-1.0.0.md).
+
+Commercial use requires a separate commercial license from the copyright
+holder. See LICENSE for contact information.
+
+"Iris Messenger" and "Iris" are trademarks of itsXactlY (aLca). The
+licenses above grant copyright and patent rights but do not grant
+trademark rights beyond nominative fair use.
+
+Required Notice: Copyright © 2026 itsXactlY (https://github.com/itsXactlY/iris-messenger)
+
+================================================================================
+THIRD-PARTY COMPONENTS
+================================================================================
+
+Iris Messenger incorporates, depends on, or distributes portions of the
+following third-party software. Their respective licenses and copyrights
+are preserved here.
+
+--------------------------------------------------------------------------------
+Runtime (server side)
+--------------------------------------------------------------------------------
+
+JackrabbitDLM — distributed lock manager and persistent message store
+  Copyright © 2021 Robert APM Darin (upstream: github.com/rapmd73/JackrabbitDLM)
+  License: GNU Lesser General Public License v2.1 (LGPL-2.1)
+  Source: https://github.com/itsXactlY/JackrabbitDLM
+  Embedded: DLMLocker.py unmodified; the server as compiled into Iris (with
+        its changes) is published at embedded/iris/dlm_server.py in that fork.
+        Only JackrabbitDLM is LGPL-2.1; the rest of Iris is not.
+
+Nuitka — Python-to-C compiler used to produce the single-file binary
+distribution (`iris-messenger.bin`).
+  Copyright © 2023-2026 Kay Hayen and contributors
+  License: Apache License 2.0
+  Source: https://github.com/Nuitka/Nuitka
+
+Caddy — automatic HTTPS reverse proxy and TLS terminator (Caddyfile in
+`quadlet/Caddyfile`, image `caddy:2.8-alpine`).
+  Copyright © 2015-2026 Matthew Holt and the Caddy authors
+  License: Apache License 2.0
+  Source: https://github.com/caddyserver/caddy
+
+Podman — rootless container runtime used to build and run the
+`iris-messenger` container.
+  Copyright © 2014-2026 Red Hat, Inc. and the Podman authors
+  License: GNU General Public License v2.0 (GPL-2.0)
+  Source: https://github.com/containers/podman
+
+pycryptodome — cryptographic primitives (X3DH key agreement, AES-GCM,
+ECDH P-256).
+  Copyright © 2014-2026 Legrandin and contributors
+  License: BSD-2-Clause / Public-domain-equivalent (see project page)
+  Source: https://github.com/Legrandin/pycryptodome
+
+websockets — WebSocket server library used by the gateway.
+  Copyright © 2013-2026 aaugustin and contributors
+  License: BSD-3-Clause
+  Source: https://github.com/aaugustin/websockets
+
+Tor — onion routing daemon, shipped unmodified inside the binary as
+`tor_bundle.tar.gz` (Tor Expert Bundle; on linux-arm64 the distro build)
+and run as a separate process for the Tor federation transport.
+  Copyright © 2001-2004 Roger Dingledine, © 2004-2006 Roger Dingledine
+  and Nick Mathewson, © 2007-2026 The Tor Project, Inc.
+  License: BSD-3-Clause (bundled with OpenSSL: Apache-2.0, libevent:
+  BSD-3-Clause, zlib: zlib License; full texts ship inside the bundle
+  and are unpacked next to tor)
+  Source: https://gitlab.torproject.org/tpo/core/tor
+
+QR Code Generator for JavaScript — renders the pairing handshake QR in the
+web UI. Vendored unmodified as `ui/qrcode-generator.js` (v1.4.4).
+  Copyright © 2009 Kazuhiko Arase
+  License: MIT
+  Source: https://github.com/kazuhikoarase/qrcode-generator
+
+Python — the CPython runtime pulled in by Nuitka for stdlib bits
+embedded in the single-file distribution.
+  Copyright © 2001-2026 Python Software Foundation
+  License: PSF License 2.0
+  Source: https://github.com/python/cpython
+
+--------------------------------------------------------------------------------
+Protocol specifications (no code, public specs)
+--------------------------------------------------------------------------------
+
+Signal Protocol — X3DH key agreement and Double Ratchet algorithm
+specifications. Iris Messenger implements these algorithms per the
+public Signal documentation; no Signal code is incorporated.
+  Specifications: https://signal.org/docs/
+
+--------------------------------------------------------------------------------
+Android client (`android/`, when present)
+--------------------------------------------------------------------------------
+
+Podroid — rootless Alpine-Linux VM with Podman/Docker/LXC preinstalled
+(github.com/ExTV/Podroid). Vendored as a git submodule in `android/podroid/`
+and statically linked into the `iris-android` APK.
+  Copyright © 2024-2026 ExTV and contributors
+  License: GNU General Public License v2.0 (GPL-2.0)
+  Source: https://github.com/ExTV/Podroid
+  License text: see `android/podroid/COPYING`
+  Note: GPL-2.0 source is unmodified. Per Section 6 of GPL-2.0, the
+        license text and copyright notice accompany any distribution;
+        the original is preserved in the submodule and any built
+        artifact's NOTICE references this attribution.
+
+================================================================================
+
+End of NOTICE.
