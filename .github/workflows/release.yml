@@ -1,0 +1,60 @@
+# Publishes a GitHub release for every tag that Iris-Messenger's publish-public
+# workflow pushes here. The binaries are already in the tree at that tag; this
+# job attaches them, SHA256SUMS and the current TheBox.apk from the update feed
+# (checked against the TheBox.apk line in SHA256SUMS), with the tag message as
+# the release notes.
+name: release
+
+on:
+  push:
+    tags: ['20*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to (re)check'
+        required: true
+      dry_run:
+        description: 'Verify everything but do not create the release'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
+
+      - name: Release notes from the tag message
+        run: |
+          git fetch --force origin "refs/tags/${TAG}:refs/tags/${TAG}"
+          git for-each-ref "refs/tags/${TAG}" --format='%(contents)' > notes.md
+          test -s notes.md || echo "Iris ${TAG}" > notes.md
+          cat notes.md
+
+      - name: TheBox.apk from the update feed
+        run: |
+          set -euo pipefail
+          url=$(curl -fsSL https://iris.mazemaker.online/thebox/manifest.json \
+                | python3 -c "import json,sys; print(next(a['apkUrl'] for a in json.load(sys.stdin)['apps'] if a['id']=='dev.mazemaker.thebox'))")
+          curl -fsSL -o TheBox.apk "$url"
+          want=$(awk '$2=="TheBox.apk"{print $1}' SHA256SUMS)
+          got=$(sha256sum TheBox.apk | cut -d' ' -f1)
+          echo "feed: $url"; echo "want $want"; echo "got  $got"
+          test "$want" = "$got"
+
+      - name: Binaries match SHA256SUMS
+        run: sha256sum -c SHA256SUMS
+
+      - name: Create the release
+        if: ${{ github.event_name == 'push' || github.event.inputs.dry_run == 'false' }}
+        run: |
+          gh release create "$TAG" --title "Iris ${TAG}" --notes-file notes.md \
+            iris-linux-x86_64 iris-linux-arm64 iris-windows-x86_64.exe SHA256SUMS TheBox.apk
